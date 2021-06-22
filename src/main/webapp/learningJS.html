@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script>
+/*var x= 5+3;
+console.log(x);
+console.log('Hello');
+var variable={
+key1:'Something',
+key2:354
+}
+for( var i in variable){
+console.log(i +" is "+variable[i]);
+}
+function somya(){
+console.log('Hi');
+}
+somya();
+var entries = Array('a','b','c');
+var entries2 = ['d','e'];
+console.log(entries2[0]); //entries2[2] - undefined
+var entries3 = new Array(5);
+console.log(entries3.length); //5
+var entries4 = new Array("5");
+console.log(entries4.length);
+//var entries5 = [,,,];
+//console.log(entries5.length);
+var entries6 = ['trains', 'planes', 'cars'];
+//entries6.length = 'truck';
+console.log(entries6.toString());
+var ratings = [5,2,4];
+console.log(ratings.valueOf());
+//console.log(s);
+var dt = new Date();
+console.log(dt);
+var dt = new Date('2/13/2015');
+console.log(dt);
+var dt = new Date('Hi Mom');
+console.log(dt);
+//REGEXP
+var blog = "Sam I am";
+var pattern = new RegExp('am','g');
+console.log(pattern instanceof RegExp);
+//JSON - ek variable h end mein isly semicolon, project variable mein tasks krke array h,,, tasks array mein frst json h or 2 h
+var project = {
+tasks : [
+{
+taskName: '1'
+},
+{
+taskName: '2'
+}
+]
+};
+console.log(project.tasks[1].taskName);
+//PROTOTYPES
+var project = {
+name: 'Project for testing'
+}
+//console.log(project.foo()); //foo not defined
+console.log(project.toString()); // [object object]
+console.log(typeof Object.prototype.toString);	//function
+console.log(project.prototype); //undefined
+console.log(typeof project.__proto__); //object
+var secretProject = Object.create(project);
+console.log(secretProject.name);
+var secretProject = Object.create(project);
+console.log(typeof secretProject.toString); //function
+//DEFINING PROPERTY
+var task = {};
+Object.defineProperty(task, 'text',{
+value:'Get this job done'
+});
+console.log(task.text); //Get this job done
+'use strict';
+var task2 = {
+_dueDate : '1/15/19'
+};
+Object.defineProperty(task,'dueDate',{
+get: function(){
+return this._dueDate;
+}
+});
+console.log(task.dueDate);
+var hireEmployee = function(name){
+};
+console.log(typeof hireEmployee); //function
+var hireEmployee2 = function(name){
+throw('Error');
+};
+hireEmployee('JJ');
+console.log(typeof hireEmployee2);
+ //CONSTRUCTOR
+console.log(typeof Object); //function
+var Employee = function(name){
+this.name=name;
+this.gaveRaise = function(){
+};
+};
+var newEmployee = new Employee('Somya');
+console.log(typeof newEmployee); //object
+console.log(typeof Employee.prototype); //object
+//THIS keyword
+console.log(typeof this); //object
+console.log(this == window); //true
+var emp = {
+name :'Somya', 
+updateSalary : function(){
+console.log(this);
+}
+};
+emp.updateSalary();
+//calling functions
+var updateZip = function(){
+console.log(this);
+}
+var zipcode ={
+zip: 43232
+};
+updateZip(zipcode)
+//with apply we need to pass arrrray of arguements in call we send comma separated list of arguements
+var updateZipCode = function(newZip, country){
+console.log(newZip+" "+country);
+};
+var zipCode = {
+zip: '11121'
+}
+updateZipCode.apply(zipCode,['342432','US']);
+//CLOSURES
+var salaryUpdater = function(salary){
+var currentSalary = salary;
+var generator = function(){
+currentSalary+=100;
+return currentSalary;
+};
+return generator;
+};
+var updateFn = salaryUpdater(500);
+updateFn();
+console.log(updateFn());
+//IIFEs
+(function(){
+console.log("Immediately executed");
+})();
+//another ex
+var app = {};
+(function(ns){
+ns.name='Somya';
+})(app);
+console.log(app.name); //somya
+//another ex
+var app = {};
+var jQuery = {};
+(function(ns,$){
+ns.name='Somya';
+console.log($ == jQuery);
+})(app,jQuery); //true
+//RECURSION
+//example1
+var orgChart = {
+name: 'Michael', subordinates: [
+{
+name: 'Andy', subordinates: [
+{
+name: 'Dwight', subordinates: []
+},
+{
+name: 'Kevin', subordinates: []
+}
+]
+}
+]
+};
+var fn = function (topEmployee) {
+console.log(topEmployee.name);
+for (var i = 0; i < topEmployee.subordinates.length; i++)
+fn(topEmployee.subordinates[i]);
+};
+fn(orgChart);
+//example2
+var orgChart = {
+name: 'Michael', subordinates: [
+{
+name: 'Andy', subordinates: [
+{
+name: 'Dwight', subordinates: []
+},
+{
+name: 'Kevin', subordinates: []
+}
+]
+}
+]
+};
+var fn = function showAllEmp(topEmployee) {
+console.log(topEmployee.name);
+for (var i = 0; i < topEmployee.subordinates.length; i++)
+showAllEmp(topEmployee.subordinates[i]);
+};
+var fn2=fn;
+fn=null; //if tis is commented it works fine
+fn2(orgChart);
+//example2
+var orgChart = {
+name: 'Michael', subordinates: [
+{
+name: 'Andy', subordinates: [
+{
+name: 'Dwight', subordinates: []
+},
+{
+name: 'Kevin', subordinates: []
+}
+]
+}
+]
+};
+var fn = function showAllEmp(topEmployee) {
+console.log(topEmployee.name);
+for (var i = 0; i < topEmployee.subordinates.length; i++)
+showAllEmp(topEmployee.subordinates[i]);
+};
+var fn2=fn;
+fn=null; //if tis is commented it works fine
+fn2(orgChart);
+console.log(window.screenLeft+' '+window.screenRight);
+console.log(window.innerWidth+' '+window.outerWidth);
+console.log('http://www.pluralsight.com','_blank');
+console.log(new Date().getSeconds());
+setTimeout(function(){
+console.log(new Date().getSeconds());
+},1000);
+//clearTimeout(id);
+//console.log(alert("Hi"));
+if(confirm('Delete everything')){
+console.log('You asked!');
+}
+else{
+console.log('maybe next time');
+}
+var result = prompt('Your name');
+console.log(result);
+console.log(location.href);
+console.log(location.host);
+console.log(location.port)
+console.log(location.protocol);
+location.assign('http://www.pluralsight.com');
+//
+var element = document.getElementById('article1');
+console.log(element);
+var elementTags = document.getElementsByTagName('p');
+console.log(elementTags);
+var elementClass = document.getElementsByClassName('c');
+console.log(elementClass);
+//queryselectors
+var element = document.querySelector('#article1');
+console.log(element);
+var elements = document.querySelector('.special'); //document.querySelector returns first match .. document.querySelectorAll.. return all matches
+console.log(elements);
+//EVENT HANDLING
+function submitForm(){
+	console.log("in submit method");
+}
+function submitForm1(element){
+	console.log(element.id);
+}
+function submitForm2(element, event){
+	console.log(event.type);
+}
+var button =
+	document.getElementById('s');
+	console.log(document.getElementById('s'));
+	button.onclick = function () {
+	console.log('Button Clicked');
+	}
+var btn2 = document.getElementById('submitButton');
+console.log(btn2);
+var div1 = document.getElementById('div1');
+var div2 = document.getElementById('div2');
+var clickHandler = function divClickHandler(event) {
+console.log(this.id);
+//here if we add below line and addevent is set to true then it wont be propagated and ans will be div1
+//event.stopPropagation();
+};
+div1.addEventListener('click', clickHandler, false);
+div2.addEventListener('click', clickHandler, false);// if this is true then the parent div will execute frst then child..in this child and then parent
+//GLOBAL FUNCTIONS
+var parsing = parseInt('1234');
+console.log(parsing); //1234
+var parsing2 = parseInt('b123');
+console.log(parsing2); //Nan
+var parsing = parseInt('12z34');
+console.log(parsing); //12
+var parsing = parseInt('1234.9');
+console.log(parsing); //1234
+var parsing = parseInt(' ');
+console.log(parsing); //nan
+var parsing = parseInt('C000', 16);
+console.log(parsing); //49152 - decimal number of hex C000
+var parsing = parseFloat('123.4');
+console.log(parsing); //123.4
+var finiteCheck = isFinite(Number.POSITIVE_INFINITY);
+console.log(finiteCheck);
+console.log(9/0);
+var checkDivideBy0 = isNaN(9/0);
+console.log(checkDivideBy0);
+var globalVar = 'foo';
+var code = 'console.log(globalVar)';
+eval(code);
+//ARGUEMENTS
+var checkArguments = function() {
+console.log(arguments.length);
+}
+checkArguments(1, true, 'Somya');
+
+//ERROR HANDLING
+try{
+throw new Error('caught');
+}
+catch(e){
+console.log(e.name+' '+e.message);
+}
+try{
+throw new RangeError('caught range error');
+}
+catch(e){
+if(e instanceof RangeError)
+console.log(e.name+' '+e.message);
+}
+*/
+
+
+
+
+
+</script>
+</head>
+<body>
+ <div id="div1" style="width:200px; height:200px; background-color: blue;">
+<div id="div2" style="width:100px; height:100px; background-color: red;"></div>
+</div>
+
+
+
+<!--
+<input id="submitButton" type="button" value="learnToPickByID"  />
+<h1>
+Sample
+</h1>
+<article id="article1" class="my-custom-class">
+<h3>Title goes here</h3>
+<p>Paragraph 1</p>
+<p class="special">Paragraph 2</p>
+<p class="special">Paragraph 3</p>
+</article> 
+ <input id="submit1" type="button" onclick="submitForm()"  />
+<input id="submit2" type="button" onclick="submitForm1(this)"  />
+<input id="submit3" type="button" onclick="submitForm2(this, event)"  />-->
+</body>
+<script>
+//PROMISES and OBSERVABLEs
+
+</script>
+</html>

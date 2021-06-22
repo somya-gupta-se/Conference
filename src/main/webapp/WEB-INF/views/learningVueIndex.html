@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app">
+<input type="text" v-model="name">
+<p>Hellow {{name}}</p>
+</div>
+<p>accessing name outside {{name}}</p>
+<script>
+    new Vue({
+    el: "#app",
+    data() {
+        return {
+        name:'Somi'
+        }
+    }
+    });
+</script>
+</body>
+</html>
